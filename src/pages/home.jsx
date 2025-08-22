@@ -13,9 +13,10 @@ import {
 import { FingerPrintIcon, UsersIcon } from "@heroicons/react/24/solid";
 import { PageTitle, Footer } from "@/widgets/layout";
 import { FeatureCard, TeamCard } from "@/widgets/cards";
-import { featuresData, teamData, contactData } from "@/data";
+import { useFeaturesData, teamData, contactData } from "@/data";
 
 export function Home() {
+  const featuresData = useFeaturesData();
   return (
     <>
       <div className="relative flex h-screen content-center items-center justify-center pt-16 pb-32">
@@ -32,7 +33,7 @@ export function Home() {
                 Expert en Aérogommage - Qualité et Précision
               </Typography>
               <Typography variant="lead" color="white" className="opacity-80">
-              Nettoyage efficace et respectueux de l'environnement, Préparation de surfaces pour une finition parfaite
+              Conscient de l'importance du renouvelable et du respect de l'environnement, l'aérogommage s'inscrit dans une action durable
               </Typography>
             </div>
           </div>
@@ -41,11 +42,13 @@ export function Home() {
       <section className="-mt-32 bg-white px-4 pb-20 pt-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featuresData.map(({ color, title, icon, description }) => (
+            {featuresData.map(({ color, title, icon, description, onCardClick, onMouseEnter }) => (
               <FeatureCard
                 key={title}
                 color={color}
                 title={title}
+                onMouseEnter={onMouseEnter}
+                onClick={onCardClick}
                 icon={React.createElement(icon, {
                   className: "w-5 h-5 text-white",
                 })}
@@ -55,9 +58,6 @@ export function Home() {
           </div>
           <div className="mt-32 flex flex-wrap items-center">
             <div className="mx-auto -mt-8 w-full px-4 md:w-5/12">
-              <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-blue-gray-900 p-2 text-center shadow-lg">
-                <FingerPrintIcon className="h-8 w-8 text-white " />
-              </div>
               <Typography
                 variant="h3"
                 className="mb-3 font-bold"
@@ -66,13 +66,27 @@ export function Home() {
                 L'aérogommage, c'est quoi?
               </Typography>
               <Typography className="mb-8 font-normal text-blue-gray-500">
-              Le décapage par aérogommage est une technique de préparation de surface qui consiste à utiliser de l'air comprimé pour propulser des matériaux abrasifs sur une surface. 
-                <br />
-                <br />
-                Contrairement au ponçage ou à l'utilisation de produits chimiques, l'aérogommage n'abîme pas la structure du bois et préserve son aspect naturel. 
-              Les granulats utilisés pour l'aérogommage sont souvent naturels et biodégradables, ce qui limite leur impact environnemental.
+              C’est un procédé de traitement de surface dérivé de la technique du sablage.
+              Cela consiste en la projection d’un <a
+                href="/abrasifs"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline hover:text-blue-800"
+              >
+                abrasif
+              </a>
+              {' '} à l’aide d’air comprimé à basse pression (entre 1,5 et 6 bars)
+              en vue du décapage ou du nettoyage de surface.
+              Cette technique est mieux adaptée que le sablage aux travaux de précision et à
+              l’emploi dans des endroits difficilement accessibles. Grâce à l’emploi de basse
+              pression et à un choix d’une large gamme d’abrasifs, elle est efficace sur tout
+              support.
+              L’utilisation d’abrasifs de très faible granulométrie permet le respect total de
+              nombreux supports. Par exemple il est possible de décaper un vernis ou une
+              peinture le long d’une vitrerie sans qu’il y ait le moindre impact sur le verre lorsque
+              l’abrasif est adapté.
+
               </Typography>
-              <Button variant="filled">Nous Contacter</Button>
             </div>
             <div className="mx-auto mt-24 flex w-full justify-center px-4 md:w-4/12 lg:mt-0">
               <Card className="shadow-lg border pb-4 shadow-gray-500/10 rounded-lg">
@@ -85,42 +99,44 @@ export function Home() {
                 </CardHeader>
               </Card>
             </div>
+
+            <div className="mt-16 flex flex-wrap items-center">
+              {/* Image on the left */}
+              <div className="mx-auto mt-24 flex w-full justify-center px-4 md:w-4/12 lg:mt-0">
+              <Card className="shadow-lg border pb-4 shadow-gray-500/10 rounded-lg">
+                <CardHeader floated={false} className="relative h-56">
+                  <img
+                    alt="Card Image"
+                    src="/img/gallery/gallery10.jpeg"
+                    className="h-full w-full"
+                  />
+                </CardHeader>
+              </Card>
+            </div>
+
+              {/* Text on the right */}
+              <div className="mx-auto mt-8 w-full px-4 md:order-2 md:w-6/12">
+                <Typography className="mb-8 font-normal text-blue-gray-500">
+                  C’est une technique efficace pour nettoyer tous les types de surface (bois, pierre,
+                  métal). Il s’agit d’une technique de nettoyage sec sans apport d’eau, qui permet une
+                  remise en état d’un support qui a subi le temps ou qui a été recouvert par une
+                  matière (peinture, vernis, enduit…). C’est aussi un bon moyen de préparer une
+                  surface métallique avant peinture car ça donne une bonne accroche indispensable à
+                  la peinture.
+                </Typography>
+                <Button variant="filled">Nous Contacter</Button>
+              </div>
+            </div>
+
+
           </div>
         </div>
       </section>
       
       <section className="relative bg-white py-24 px-4">
         <div className="container mx-auto">
-          <PageTitle section="Co-Working" heading="Build something">
-            Put the potentially record low maximum sea ice extent tihs year down
-            to low ice. According to the National Oceanic and Atmospheric
-            Administration, Ted, Scambos.
-          </PageTitle>
-          <div className="mx-auto mt-20 mb-48 grid max-w-5xl grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
-            {contactData.map(({ title, icon, description }) => (
-              <Card
-                key={title}
-                color="transparent"
-                shadow={false}
-                className="text-center text-blue-gray-900"
-              >
-                <div className="mx-auto mb-6 grid h-14 w-14 place-items-center rounded-full bg-blue-gray-900 shadow-lg shadow-gray-500/20">
-                  {React.createElement(icon, {
-                    className: "w-5 h-5 text-white",
-                  })}
-                </div>
-                <Typography variant="h5" color="blue-gray" className="mb-2">
-                  {title}
-                </Typography>
-                <Typography className="font-normal text-blue-gray-500">
-                  {description}
-                </Typography>
-              </Card>
-            ))}
-          </div>
-          <PageTitle section="Nous Contacter" heading="Vous avez besoin de nos services?">
-            Completez le formulaire ci-dessous et nous vous contacterons dans les 24 heures.
-            <br />
+          <PageTitle heading="Besoin d'un devis gratuit?">
+            Complétez le formulaire ci-dessous et nous vous contacterons dans les 24 heures.
             Nous sommes impatients de travailler avec vous!
           </PageTitle>
           <form className="mx-auto w-full mt-12 lg:w-6/12">

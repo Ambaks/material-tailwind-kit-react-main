@@ -1,6 +1,8 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Navbar } from "@/widgets/layout";
 import routes from "@/routes";
+import Services from "./pages/services";
+import Abrasifs from "./pages/abrasifs";
 
 
 function App() {
@@ -20,6 +22,9 @@ function App() {
             element && <Route key={key} exact path={path} element={element} />
         )}
         <Route path="*" element={<Navigate to="/home" replace />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/abrasifs" element={<Abrasifs />} />
+
       </Routes>
     </>
   );
