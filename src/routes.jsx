@@ -1,4 +1,5 @@
-import { Home, Gallery, FAQ, Services } from "@/pages";
+import { Home, Gallery, FAQ } from "@/pages";
+import Services from "./pages/services";
 
 export const routes = [
   {
