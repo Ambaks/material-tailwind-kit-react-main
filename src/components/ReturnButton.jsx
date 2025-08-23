@@ -5,7 +5,7 @@ function ReturnButton() {
   const navigate = useNavigate();
 
   // Show button on all pages except home ("/")
-  if (location.pathname === "/home" || location.pathname === "/services") return null;
+  if (location.pathname === "/home" || location.pathname === "/services" || location.pathname === "/abrasifs") return null;
 
   return (
     <button 

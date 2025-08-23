@@ -1,4 +1,5 @@
 import React from "react";
+import ContactForm from "../components/ContactForm";
 import {
   Card,
   CardBody,
@@ -124,7 +125,14 @@ export function Home() {
                   surface métallique avant peinture car ça donne une bonne accroche indispensable à
                   la peinture.
                 </Typography>
-                <Button variant="filled">Nous Contacter</Button>
+                <Button
+                  variant="filled"
+                  onClick={() => {
+                    document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                >
+                  Nous Contacter
+                </Button>
               </div>
             </div>
 
@@ -133,42 +141,8 @@ export function Home() {
         </div>
       </section>
       
-      <section className="relative bg-white py-24 px-4">
-        <div className="container mx-auto">
-          <PageTitle heading="Besoin d'un devis gratuit?">
-            Complétez le formulaire ci-dessous et nous vous contacterons dans les 24 heures.
-            Nous sommes impatients de travailler avec vous!
-          </PageTitle>
-          <form className="mx-auto w-full mt-12 lg:w-6/12">
-            <div className="mb-8 flex gap-4">
-              <Input variant="outlined" size="lg" label="Nom et prénom" />
-              <Input variant="outlined" size="lg" label="Adresse e-mail" />
-              <Input variant="outlined" size="lg" label="Téléphone" />
-            </div>
-            <Textarea variant="outlined" size="lg" label="Message" rows={8} />
-            <Checkbox
-              label={
-                <Typography
-                  variant="small"
-                  color="gray"
-                  className="flex items-center font-normal"
-                >
-                  J'accepte
-                  <a
-                    href="#"
-                    className="font-medium transition-colors hover:text-gray-900"
-                  >
-                    &nbsp;les conditions générales.
-                  </a>
-                </Typography>
-              }
-              containerProps={{ className: "-ml-2.5" }}
-            />
-            <Button variant="gradient" size="lg" className="mt-8" fullWidth>
-              Send Message
-            </Button>
-          </form>
-        </div>
+      <section id="contact-form" className="relative bg-white py-24 px-4">
+        <ContactForm />
       </section>
       <div className="bg-white">
         <Footer />
