@@ -3,6 +3,7 @@ import { Navbar } from "@/widgets/layout";
 import routes from "@/routes";
 import Services from "./pages/services";
 import Abrasifs from "./pages/abrasifs";
+import ReturnButton from "./components/ReturnButton";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       {!(pathname == '/sign-in' || pathname == '/sign-up') && (
         <div className="container absolute left-2/4 z-10 mx-auto -translate-x-2/4 p-4">
           <Navbar routes={routes} />
+          <ReturnButton /> {/* ⬅ show back button (auto-hides on /home and /services) */}
         </div>
       )
       }
